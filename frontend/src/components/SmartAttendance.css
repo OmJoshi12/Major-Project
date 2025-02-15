@@ -1,0 +1,81 @@
+.smart-attendance {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #ffffff; /* White background */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.smart-attendance:hover {
+  transform: scale(1.02);
+}
+
+h2 {
+  text-align: center;
+  color: #5A189A; /* Deep Blue-Violet */
+  margin-bottom: 20px;
+}
+
+.attendance-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #343A40; /* Darker text */
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #5A189A; /* Focus color */
+  outline: none;
+}
+
+.camera-container {
+  margin: 20px 0;
+}
+
+.camera-container video {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 4px;
+  border: 2px solid #5A189A; /* Border color */
+}
+
+.start-camera-btn, .mark-attendance-btn {
+  padding: 10px 20px;
+  background-color: #007BFF; /* Primary color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.start-camera-btn:hover, .mark-attendance-btn:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.message {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  color: #d9534f; /* Bootstrap danger color */
+  text-align: center;
+} 
