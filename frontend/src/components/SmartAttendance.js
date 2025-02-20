@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import './SmartAttendance.css';
 
@@ -6,6 +6,7 @@ const SmartAttendance = () => {
   const [enrollmentNumber, setEnrollmentNumber] = useState('');
   const [studentName, setStudentName] = useState('');
   const [message, setMessage] = useState('');
+  const [presentStudents, setPresentStudents] = useState([]);
   const videoRef = useRef(null);
   const [isCapturing, setIsCapturing] = useState(false);
 
@@ -30,6 +31,7 @@ const SmartAttendance = () => {
       const formData = new FormData();
       formData.append('image', blob);
       formData.append('student_id', enrollmentNumber); // Use enrollment number
+      formData.append('studentName', studentName); // Append student name
 
       try {
         const response = await axios.post('http://localhost:5001/api/face/verify', formData);
@@ -38,9 +40,11 @@ const SmartAttendance = () => {
           await axios.post('http://localhost:5000/api/attendance/mark', {
             studentId: enrollmentNumber,
             studentName: studentName,
-            date: new Date()
+            date: new Date(),
+            image: blob // Send the image blob
           });
           setMessage('Attendance marked successfully!');
+          fetchPresentStudents(); // Fetch present students after marking attendance
         } else {
           setMessage('Face verification failed. Please try again.');
         }
@@ -55,6 +59,24 @@ const SmartAttendance = () => {
     setMessage('');
     captureImage();
   };
+
+  const fetchPresentStudents = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/attendance/present');
+      if (Array.isArray(response.data)) {
+        setPresentStudents(response.data);
+      } else {
+        console.error('Expected an array but got:', response.data);
+        setPresentStudents([]); // Reset to empty array if not an array
+      }
+    } catch (error) {
+      console.error('Error fetching present students:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPresentStudents(); // Fetch present students on component mount
+  }, []);
 
   return (
     <div className="smart-attendance">
@@ -96,6 +118,14 @@ const SmartAttendance = () => {
         </div>
       </form>
       {message && <p className="message">{message}</p>}
+      <h3>Present Students</h3>
+      <ul className="present-students-list">
+        {presentStudents.map((student, index) => (
+          <li key={index}>
+            {student.studentName} (ID: {student.studentId})
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

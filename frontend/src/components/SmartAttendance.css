@@ -78,4 +78,18 @@ input:focus {
   border-radius: 4px;
   color: #d9534f; /* Bootstrap danger color */
   text-align: center;
+}
+
+.present-students-list {
+  margin-top: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.present-students-list li {
+  background: #f8f9fa; /* Light background for list items */
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  border: 1px solid #e0e0e0; /* Light border */
 } 

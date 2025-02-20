@@ -35,8 +35,6 @@ const LandingPage = () => {
         <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
           <Link to="/">Home</Link>
           <a onClick={() => scrollToSection('features')}>Features</a>
-          <Link to="/courses">Courses</Link>
-          <Link to="/timetable">Timetable</Link>
           <Link to="/students">Students</Link>
           <Link to="/faculty">Faculty</Link>
           <Link to="/smart-attendance">Smart Attendance</Link>
@@ -183,7 +181,6 @@ const LandingPage = () => {
             <h4>Quick Links</h4>
             <div className="links-grid">
               <Link to="/about">About Us</Link>
-              <Link to="/courses">Courses</Link>
               <Link to="/faculty">Faculty</Link>
               <Link to="/contact">Contact</Link>
             </div>
